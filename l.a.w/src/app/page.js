@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+//import Link from "next/link";
+import CustomButton from "../components/ui/CustomButton";
 
 export default function Home() {
   return (
@@ -17,15 +17,14 @@ export default function Home() {
           professionals.
         </p>
         <div className="flex gap-4 justify-center">
-          <Button asChild size="lg" variant="default">
-            <Link href="/login">Get Started</Link>
-          </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link href="/dashboard">Explore Cases</Link>
-          </Button>
+          <CustomButton href="/login" size="lg" variant="default" asChild>
+            Get Started
+          </CustomButton>
+          <CustomButton href="/dashboard" size="lg" variant="outline" asChild>
+            Explore Cases
+          </CustomButton>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

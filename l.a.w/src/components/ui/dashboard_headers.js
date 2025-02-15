@@ -1,7 +1,12 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { UserCircle } from "lucide-react"
+import Link from "next/link";
+import Button from "./CustomButton";
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
+import { UserCircle } from "lucide-react";
 
 export function DashboardHeader() {
   return (
@@ -33,10 +38,10 @@ export function DashboardHeader() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem>
                   <Link href="/profile">Profile</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem>
                   <Link href="/login">Logout</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -45,6 +50,5 @@ export function DashboardHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }
-

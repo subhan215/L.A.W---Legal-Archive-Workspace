@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { DashboardHeader } from "@/components/dashboard-header"
+import Button from "../../../components/ui/CustomButton"
+import {Badge} from "../../../components/ui/badge"
+import { DashboardHeader } from "../../../components/ui/dashboard_headers"
 import { Download, Lock, Globe } from "lucide-react"
 
 export default function CollectionDetailPage() {

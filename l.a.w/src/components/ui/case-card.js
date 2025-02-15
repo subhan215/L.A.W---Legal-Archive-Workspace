@@ -1,14 +1,11 @@
-import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Lock, Globe } from "lucide-react"
+import React from "react";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import Button from "./CustomButton"
+import { Card, CardContent, CardFooter, CardHeader } from "./card";
+import { Lock, Globe } from "lucide-react";
 
-interface CaseCardProps {
-  isPrivate?: boolean
-}
-
-export function CaseCard({ isPrivate = false }: CaseCardProps) {
+export function CaseCard({ isPrivate = false }) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -34,11 +31,10 @@ export function CaseCard({ isPrivate = false }: CaseCardProps) {
         </p>
       </CardContent>
       <CardFooter>
-        <Button asChild variant="outline" className="w-full">
+        <Button variant="outline" className="w-full">
           <Link href="/collections/1">View Details</Link>
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }
-

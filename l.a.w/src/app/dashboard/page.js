@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { CaseCard } from "@/components/case-card"
-import { DashboardHeader } from "@/components/dashboard-header"
+import Button from "../../components/ui/CustomButton"
+import Input from "@/components/ui/input"
+import { CaseCard } from "@/components/ui/case-card"
+import { DashboardHeader } from "../../components/ui/dashboard_headers"
 import { Search } from "lucide-react"
 
 export default function DashboardPage() {

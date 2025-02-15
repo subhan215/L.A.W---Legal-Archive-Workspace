@@ -1,13 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+import Button from "../../components/ui/CustomButton"
+import Input from "../../components/ui/input"
+import  Label  from "../../components/ui/label"
+import Textarea from "../../components/ui/text_area"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
-import { DashboardHeader } from "@/components/dashboard-header"
+import { DashboardHeader } from "../../components/ui/dashboard_headers"
 import { Upload } from "lucide-react"
 
 export default function UploadPage() {

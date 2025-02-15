@@ -1,24 +1,22 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Icons } from "@/components/icons"
+import React, { useState } from "react";
+import Link from "next/link";
+import Button from "../../components/ui/CustomButton";
+import Input from "../../components/ui/input";
+import Label from "../../components/ui/label";
+import {Icons} from "../../components/ui/icons";
 
 export default function LoginPage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault()
-    setIsLoading(true)
+  async function onSubmit(event) {
+    event.preventDefault();
+    setIsLoading(true);
 
     setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+      setIsLoading(false);
+    }, 3000);
   }
 
   return (
@@ -27,7 +25,9 @@ export default function LoginPage() {
         <div className="h-full flex items-center justify-center px-8">
           <div className="space-y-6">
             <h1 className="text-3xl font-bold">Welcome back to CaseVault</h1>
-            <p className="text-muted-foreground">Access your legal documents securely and efficiently</p>
+            <p className="text-muted-foreground">
+              Access your legal documents securely and efficiently
+            </p>
           </div>
         </div>
       </div>
@@ -35,7 +35,9 @@ export default function LoginPage() {
         <div className="mx-auto w-[350px] space-y-6">
           <div className="space-y-2 text-center">
             <h1 className="text-2xl font-bold">Login</h1>
-            <p className="text-muted-foreground">Enter your credentials to access your account</p>
+            <p className="text-muted-foreground">
+              Enter your credentials to access your account
+            </p>
           </div>
           <form onSubmit={onSubmit}>
             <div className="space-y-4">
@@ -74,6 +76,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

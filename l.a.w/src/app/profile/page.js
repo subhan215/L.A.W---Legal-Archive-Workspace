@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { DashboardHeader } from "@/components/dashboard-header"
-import { CaseCard } from "@/components/case-card"
+import Button from "../../components/ui/CustomButton"
+import Input from "../../components/ui/input"
+import Label from "../../components/ui/label"
+import { Separator } from "../../components/ui/seperator"
+import { DashboardHeader } from "../../components/ui/dashboard_headers"
+import { CaseCard } from "../../components/ui/case-card"
 
 export default function ProfilePage() {
   return (

@@ -1,24 +1,22 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Icons } from "@/components/icons"
+import React, { useState } from "react";
+import Link from "next/link";
+import Button from "../../components/ui/CustomButton";
+import  Input  from "../../components/ui/input";
+import Label from "../../components/ui/label";
+import { Icons } from "../../components/ui/icons";
 
 export default function RegisterPage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault()
-    setIsLoading(true)
+  async function onSubmit(event) {
+    event.preventDefault();
+    setIsLoading(true);
 
     setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+      setIsLoading(false);
+    }, 3000);
   }
 
   return (
@@ -82,6 +80,5 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
