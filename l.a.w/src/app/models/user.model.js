@@ -12,10 +12,7 @@ const UserSchema = new mongoose.Schema({
     required: true, 
     unique: true 
     },
-  passwordHash: { 
-    type: String, 
-    required: true 
-    },
+  passwordHash: { type: String, required: true }, // Make sure it's "passwordHash"
   profilePicture: { 
     type: String, default: "" 
     }, 

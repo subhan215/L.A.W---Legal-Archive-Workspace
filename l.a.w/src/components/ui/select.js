@@ -12,7 +12,7 @@ export function Select({ value, onChange, options, placeholder }) {
       </SelectTrigger>
       {open && (
         <SelectContent>
-          {options.map((option) => (
+          {options?.map((option) => (
             <SelectItem
               key={option.value}
               value={option.value}

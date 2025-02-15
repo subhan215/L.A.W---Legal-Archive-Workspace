@@ -8,6 +8,7 @@ if (!MONGO_URL) {
 
 const connectDB = async () => {
   if (mongoose.connection.readyState >= 1) {
+    console.log("Already connected");
     return; // Already connected
   }
 

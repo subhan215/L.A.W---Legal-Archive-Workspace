@@ -19,8 +19,7 @@ const CollectionSchema = new mongoose.Schema({
      },
   category: { 
     type: String, 
-    enum: ["Criminal", "Civil", "Corporate", "Family", "Intellectual Property"], 
-    required: true 
+    enum: ["Criminal", "Civil", "Corporate", "Family", "Intellectual Property"],  
     },
   tags: [
     { 

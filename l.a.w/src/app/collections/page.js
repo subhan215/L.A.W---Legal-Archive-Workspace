@@ -1,10 +1,29 @@
-import Button from "../../components/ui/CustomButton"
-import  Input  from "../../components/ui/input"
-import { Search } from "lucide-react"
-import { CaseCard } from "../../components/ui/case-card"
-import { DashboardHeader } from "../../components/ui/dashboard_headers"
+"use client";
+
+import { useEffect, useState } from "react";
+import Button from "../../components/ui/CustomButton";
+import Input from "../../components/ui/input";
+import { Search } from "lucide-react";
+import { CaseCard } from "../../components/ui/case-card";
+import { DashboardHeader } from "../../components/ui/dashboard_headers";
 
 export default function CollectionsPage() {
+  const [collections, setCollections] = useState([]);
+
+  useEffect(() => {
+    const fetchCollections = async () => {
+      try {
+        const res = await fetch("/api/collections");
+        const data = await res.json();
+        setCollections(data);
+      } catch (error) {
+        console.error("Error fetching collections:", error);
+      }
+    };
+
+    fetchCollections();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <DashboardHeader />
@@ -18,12 +37,20 @@ export default function CollectionsPage() {
           <Input placeholder="Search your collections..." className="pl-10" />
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <CaseCard key={i} isPrivate={i % 2 === 0} />
-          ))}
+          {collections.length > 0 ? (
+            collections.map((collection) => (
+              <CaseCard
+                key={collection._id}
+                title={collection.title}
+                isPrivate={collection.visibility === "private"}
+                link={`/collections/${collection._id}`}
+              />
+            ))
+          ) : (
+            <p>No collections found.</p>
+          )}
         </div>
       </main>
     </div>
-  )
+  );
 }
-

@@ -5,20 +5,46 @@ import Link from "next/link";
 import Button from "../../components/ui/CustomButton";
 import Input from "../../components/ui/input";
 import Label from "../../components/ui/label";
-import {Icons} from "../../components/ui/icons";
+import { Icons } from "../../components/ui/icons";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
 
   async function onSubmit(event) {
     event.preventDefault();
     setIsLoading(true);
-
-    setTimeout(() => {
+  
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+        credentials: "include", // ✅ REQUIRED for cookies to be sent
+      });
+  
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Login failed");
+      }
+  
+      alert("Login successful!");
+      window.location.href = "/dashboard"; // Redirect after successful login
+    } catch (error) {
+      console.error("Login Error:", error);
+      alert(error.message);
+    } finally {
       setIsLoading(false);
-    }, 3000);
+    }
   }
-
+  
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       <div className="hidden lg:block bg-muted">
@@ -43,11 +69,24 @@ export default function LoginPage() {
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" placeholder="m@example.com" required type="email" />
+                <Input
+                  id="email"
+                  placeholder="m@example.com"
+                  required
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" required type="password" />
+                <Input
+                  id="password"
+                  required
+                  type="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
               </div>
               <Button className="w-full" type="submit" disabled={isLoading}>
                 {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
@@ -60,7 +99,9 @@ export default function LoginPage() {
               <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+              <span className="bg-background px-2 text-muted-foreground">
+                Or continue with
+              </span>
             </div>
           </div>
           <Button variant="outline" className="w-full" type="button">
