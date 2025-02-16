@@ -23,7 +23,7 @@ export default function Home() {
           </Badge>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Your Digital Legal Library</h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-200">
-            CaseVault revolutionizes legal document management with AI-powered organization, secure storage, and instant
+            L.A.W. revolutionizes legal document management with AI-powered organization, secure storage, and instant
             accessibility.
           </p>
           <div className="flex gap-4 justify-center">
@@ -136,8 +136,8 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Badge className="mb-4">Process</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How CaseVault Works</h2>
-            <p className="text-muted-foreground">Get started with CaseVault in three simple steps</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">How L.A.W. Works</h2>
+            <p className="text-muted-foreground">Get started with L.A.W. in three simple steps</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
@@ -177,13 +177,13 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Badge className="mb-4">Testimonials</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Trusted by Legal Professionals</h2>
-            <p className="text-muted-foreground">See what our users have to say about CaseVault</p>
+            <p className="text-muted-foreground">See what our users have to say about L.A.W.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 quote:
-                  "CaseVault has transformed how our firm manages legal documents. The AI-powered features save us countless hours.",
+                  "L.A.W. has transformed how our firm manages legal documents. The AI-powered features save us countless hours.",
                 author: "Sarah Johnson",
                 role: "Senior Partner, Johnson & Associates",
               },
@@ -195,7 +195,7 @@ export default function Home() {
               },
               {
                 quote:
-                  "As a solo practitioner, CaseVault helps me stay organized and professional. It's like having a digital assistant.",
+                  "As a solo practitioner, L.A.W. helps me stay organized and professional. It's like having a digital assistant.",
                 author: "Amanda Rodriguez",
                 role: "Independent Attorney",
               },
@@ -227,7 +227,7 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Badge className="mb-4">FAQ</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-muted-foreground">Find answers to common questions about CaseVault</p>
+            <p className="text-muted-foreground">Find answers to common questions about L.A.W.</p>
           </div>
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible>
@@ -270,7 +270,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Legal Practice?</h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Join thousands of legal professionals who trust CaseVault for their document management needs.
+              Join thousands of legal professionals who trust L.A.W. for their document management needs.
             </p>
             <div className="flex gap-4 justify-center">
               <Button asChild size="lg">

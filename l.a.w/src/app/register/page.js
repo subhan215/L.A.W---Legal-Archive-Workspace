@@ -65,7 +65,7 @@ export default function RegisterPage() {
       <div className="hidden lg:block bg-muted">
         <div className="h-full flex items-center justify-center px-8">
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold">Join CaseVault</h1>
+            <h1 className="text-3xl font-bold">Join L.A.W.</h1>
             <p className="text-muted-foreground">Create an account to start managing your legal documents</p>
           </div>
         </div>

@@ -63,10 +63,9 @@ export default function DashboardPage() {
       <main className="container mx-auto p-6">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Public Collections</h1>
-          <Button>Create Collection</Button>
         </div>
         <div className="relative mb-8">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search public collections..."
             className="pl-10"

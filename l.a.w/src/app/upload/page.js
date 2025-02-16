@@ -68,79 +68,96 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
-      <main className="container mx-auto p-6">
-        <div className="max-w-2xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Upload Document</h1>
-          {userId && <p className="text-gray-600">Logged in as User ID: {userId}</p>}
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div className="space-y-2">
-              <Label htmlFor="title">Case Title</Label>
-              <Input id="title" placeholder="Enter case title" value={formData.title} onChange={handleChange} required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="category">Legal Category</Label>
-              <CustomSelect
-                value={formData.category}
-                onChange={(value) => setFormData({ ...formData, category: value })}
+    <div className="min-h-screen flex flex-col bg-background">
+  <DashboardHeader />
+  <main className="container mx-auto p-6 flex flex-col items-center">
+    <div className="w-full max-w-2xl">
+      <h1 className="text-3xl font-bold mb-8 text-center">Upload Document</h1>
 
-                options={[
-                  { value: "Criminal", label: "Criminal Law" },
-                  { value: "Civil", label: "Civil Law" },
-                  { value: "Corporate", label: "Corporate Law" },
-                ]}
-                placeholder="Select category"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="description">Case Description</Label>
-              <Textarea
-                id="description"
-                placeholder="Enter a brief description of the case"
-                rows={4}
-                value={formData.description}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="file">Upload Document</Label>
-              <div className="border-2 border-dashed rounded-lg p-8 text-center">
-                <Upload className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
-                <p className="text-sm text-muted-foreground mb-2">
-                  Drag and drop your file here, or click to select
-                </p>
-                <p className="text-xs text-muted-foreground">Supported formats: PDF, DOCX (Max size: 10MB)</p>
-                <Input
-                  id="file"
-                  type="file"
-                  className="hidden"
-                  accept=".pdf,.docx"
-                  onChange={handleFileChange}
-                  required
-                  ref={fileInputRef}
-                />
-                <Button
-                  variant="outline"
-                  className="mt-4"
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  Select File
-                </Button>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
-            <Switch id="public" checked={isPublic} onChange={() => setIsPublic(!isPublic)} />
-
-              <Label htmlFor="public">Make this collection public</Label>
-            </div>
-            <Button className="w-full" type="submit">
-              Upload Document
-            </Button>
-          </form>
+      <form className="space-y-6" onSubmit={handleSubmit}>
+        {/* Case Title */}
+        <div className="space-y-2">
+          <Label htmlFor="title">Case Title</Label>
+          <Input
+            id="title"
+            placeholder="Enter case title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
         </div>
-      </main>
+
+        {/* Legal Category */}
+        <div className="space-y-2">
+          <Label htmlFor="category">Legal Category</Label>
+          <CustomSelect
+            value={formData.category}
+            onChange={(value) => setFormData({ ...formData, category: value })}
+            options={[
+              { value: "Criminal", label: "Criminal Law" },
+              { value: "Civil", label: "Civil Law" },
+              { value: "Corporate", label: "Corporate Law" },
+            ]}
+            placeholder="Select category"
+          />
+        </div>
+
+        {/* Case Description */}
+        <div className="space-y-2">
+          <Label htmlFor="description">Case Description</Label>
+          <Textarea
+            id="description"
+            placeholder="Enter a brief description of the case"
+            rows={4}
+            value={formData.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {/* File Upload */}
+        <div className="space-y-2">
+          <Label htmlFor="file">Upload Document</Label>
+          <div
+            className="border-2 border-dashed rounded-lg p-8 text-center cursor-pointer hover:bg-gray-100 transition"
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <Upload className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground mb-2">
+              Drag and drop your file here, or click to select
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Supported formats: PDF, DOCX (Max size: 10MB)
+            </p>
+            <Input
+              id="file"
+              type="file"
+              className="hidden"
+              accept=".pdf,.docx"
+              onChange={handleFileChange}
+              required
+              ref={fileInputRef}
+            />
+            <Button variant="outline" className="mt-4">
+              Select File
+            </Button>
+          </div>
+        </div>
+
+        {/* Public Toggle */}
+        <div className="flex items-center space-x-2">
+          <Switch id="public" checked={isPublic} onCheckedChange={setIsPublic} />
+          <Label htmlFor="public">Make this collection public</Label>
+        </div>
+
+        {/* Submit Button */}
+        <Button className="w-full" type="submit">
+          Upload Document
+        </Button>
+      </form>
     </div>
+  </main>
+</div>
+
   );
 }

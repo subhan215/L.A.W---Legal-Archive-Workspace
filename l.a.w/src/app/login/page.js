@@ -51,7 +51,7 @@ export default function LoginPage() {
       <div className="hidden lg:block bg-muted">
         <div className="h-full flex items-center justify-center px-8">
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold">Welcome back to CaseVault</h1>
+            <h1 className="text-3xl font-bold">Welcome back to L.A.W.</h1>
             <p className="text-muted-foreground">
               Access your legal documents securely and efficiently
             </p>
