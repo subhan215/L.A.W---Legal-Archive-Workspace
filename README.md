@@ -97,7 +97,7 @@ Stored on Cloudinary
 
 🛠️ API Endpoints (Postman Collection)
 
-🔗 Postman Collection Link:👉 Click Here
+🔗 Postman Collection Link:https://tweetandtube.postman.co/workspace/TweetANDTube~65649db1-febf-4cbf-b08b-6483945d94bf/collection/36693995-57066df8-5e4f-4f14-bd37-12a8a150d0ca?action=share&creator=36693995
 
 🛠️ Docker Commands
 
