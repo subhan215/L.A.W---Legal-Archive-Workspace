@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "../../components/ui/CustomButton";
 import Input from "../../components/ui/input";
 import Label from "../../components/ui/label";
 import Textarea from "../../components/ui/text_area";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { DashboardHeader } from "../../components/ui/dashboard_headers";
 import { Upload } from "lucide-react";
+import CustomSelect from "@/components/ui/select";
 
 export default function UploadPage() {
   const [isPublic, setIsPublic] = useState(false);
@@ -18,6 +18,16 @@ export default function UploadPage() {
     category: "",
     description: "",
   });
+  const [userId, setUserId] = useState(null);
+  const fileInputRef = useRef(null);
+
+  // Fetch userId from localStorage
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -37,6 +47,9 @@ export default function UploadPage() {
     uploadData.append("description", formData.description);
     uploadData.append("isPublic", isPublic);
     uploadData.append("file", file);
+    uploadData.append("userId", userId);
+
+    console.log("userId: ", userId);
 
     try {
       const res = await fetch("/api/upload", {
@@ -60,6 +73,7 @@ export default function UploadPage() {
       <main className="container mx-auto p-6">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-3xl font-bold mb-8">Upload Document</h1>
+          {userId && <p className="text-gray-600">Logged in as User ID: {userId}</p>}
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-2">
               <Label htmlFor="title">Case Title</Label>
@@ -67,36 +81,58 @@ export default function UploadPage() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="category">Legal Category</Label>
-              <Select onValueChange={(value) => setFormData({ ...formData, category: value })}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="criminal">Criminal Law</SelectItem>
-                  <SelectItem value="civil">Civil Law</SelectItem>
-                  <SelectItem value="corporate">Corporate Law</SelectItem>
-                  <SelectItem value="constitutional">Constitutional Law</SelectItem>
-                </SelectContent>
-              </Select>
+              <CustomSelect
+                value={formData.category}
+                onChange={(value) => setFormData({ ...formData, category: value })}
+
+                options={[
+                  { value: "Criminal", label: "Criminal Law" },
+                  { value: "Civil", label: "Civil Law" },
+                  { value: "Corporate", label: "Corporate Law" },
+                ]}
+                placeholder="Select category"
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="description">Case Description</Label>
-              <Textarea id="description" placeholder="Enter a brief description of the case" rows={4} value={formData.description} onChange={handleChange} required />
+              <Textarea
+                id="description"
+                placeholder="Enter a brief description of the case"
+                rows={4}
+                value={formData.description}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="file">Upload Document</Label>
               <div className="border-2 border-dashed rounded-lg p-8 text-center">
                 <Upload className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
-                <p className="text-sm text-muted-foreground mb-2">Drag and drop your file here, or click to select</p>
+                <p className="text-sm text-muted-foreground mb-2">
+                  Drag and drop your file here, or click to select
+                </p>
                 <p className="text-xs text-muted-foreground">Supported formats: PDF, DOCX (Max size: 10MB)</p>
-                <Input id="file" type="file" className="hidden" accept=".pdf,.docx" onChange={handleFileChange} required />
-                <Button variant="outline" className="mt-4" onClick={() => document.getElementById("file").click()}>
+                <Input
+                  id="file"
+                  type="file"
+                  className="hidden"
+                  accept=".pdf,.docx"
+                  onChange={handleFileChange}
+                  required
+                  ref={fileInputRef}
+                />
+                <Button
+                  variant="outline"
+                  className="mt-4"
+                  onClick={() => fileInputRef.current?.click()}
+                >
                   Select File
                 </Button>
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <Switch id="public" checked={isPublic} onCheckedChange={setIsPublic} />
+            <Switch id="public" checked={isPublic} onChange={() => setIsPublic(!isPublic)} />
+
               <Label htmlFor="public">Make this collection public</Label>
             </div>
             <Button className="w-full" type="submit">

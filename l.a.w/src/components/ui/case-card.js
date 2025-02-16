@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -5,7 +7,7 @@ import Button from "./CustomButton"
 import { Card, CardContent, CardFooter, CardHeader } from "./card";
 import { Lock, Globe } from "lucide-react";
 
-export function CaseCard({ isPrivate = false }) {
+export function CaseCard({ title, isPrivate, link ,desc}) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -22,17 +24,16 @@ export function CaseCard({ isPrivate = false }) {
             </>
           )}
         </Badge>
-        <Badge>Criminal Law</Badge>
       </CardHeader>
       <CardContent>
-        <h3 className="font-semibold mb-2">Smith vs. State of California</h3>
+        <h3 className="font-semibold mb-2">{title}</h3>
         <p className="text-sm text-muted-foreground">
-          A landmark case discussing the implications of digital privacy rights in modern law enforcement.
+         {desc}
         </p>
       </CardContent>
       <CardFooter>
         <Button variant="outline" className="w-full">
-          <Link href="/collections/1">View Details</Link>
+          <Link href={link}>View Details</Link>
         </Button>
       </CardFooter>
     </Card>

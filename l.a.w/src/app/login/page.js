@@ -36,6 +36,7 @@ export default function LoginPage() {
       }
   
       alert("Login successful!");
+      localStorage.setItem("userId", data.userId);
       window.location.href = "/dashboard"; // Redirect after successful login
     } catch (error) {
       console.error("Login Error:", error);

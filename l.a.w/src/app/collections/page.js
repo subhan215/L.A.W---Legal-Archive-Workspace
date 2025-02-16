@@ -9,20 +9,61 @@ import { DashboardHeader } from "../../components/ui/dashboard_headers";
 
 export default function CollectionsPage() {
   const [collections, setCollections] = useState([]);
+  const [filteredCollections, setFilteredCollections] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    setUserId(storedUserId);
+
     const fetchCollections = async () => {
       try {
         const res = await fetch("/api/collections");
         const data = await res.json();
-        setCollections(data);
+
+        // Ensure ID comparison is correct
+        const userCollections = data.filter(
+          (collection) => String(collection.userId) === storedUserId
+        );
+
+        setCollections(userCollections);
+        setFilteredCollections(userCollections);
       } catch (error) {
         console.error("Error fetching collections:", error);
       }
     };
 
-    fetchCollections();
+    if (storedUserId) {
+      fetchCollections();
+    }
   }, []);
+
+  // ✅ Improved Filtering - Runs on Search Input Change
+  const handleSearch = (e) => {
+    const query = e.target.value.trim().toLowerCase();
+    setSearchQuery(query);
+  
+    if (!query) {
+      setFilteredCollections(collections);
+      return;
+    }
+  
+    const filtered = collections.filter((collection) => {
+      const title = collection.title?.toLowerCase() || "";
+      const description = collection.description?.toLowerCase() || "";
+      const category = collection.category?.toLowerCase() || "";
+  
+      return (
+        title.includes(query) ||
+        description.includes(query) ||
+        category.includes(query)
+      );
+    });
+  
+    setFilteredCollections(filtered);
+  };
+  
 
   return (
     <div className="min-h-screen bg-background">
@@ -34,15 +75,21 @@ export default function CollectionsPage() {
         </div>
         <div className="relative mb-8">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input placeholder="Search your collections..." className="pl-10" />
+          <Input
+            placeholder="Search collections by category or description..."
+            className="pl-10"
+            value={searchQuery}
+            onChange={handleSearch} // ✅ Real-time search with instant updates
+          />
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {collections.length > 0 ? (
-            collections.map((collection) => (
+          {filteredCollections.length > 0 ? (
+            filteredCollections.map((collection) => (
               <CaseCard
                 key={collection._id}
                 title={collection.title}
                 isPrivate={collection.visibility === "private"}
+                desc={collection.description}
                 link={`/collections/${collection._id}`}
               />
             ))

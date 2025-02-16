@@ -14,6 +14,7 @@ export async function POST(req) {
     const title = formData.get("title");
     const category = formData.get("category");
     const description = formData.get("description");
+    const userId = formData.get("userId");
     const isPublic = formData.get("isPublic") === "true"; // Convert to boolean
     const file = formData.get("file");
 
@@ -36,11 +37,12 @@ export async function POST(req) {
 
     // Save document details to MongoDB
     const newCollection = new Collection({
+      userId,
       title,
       category,
       description,
       visibility: isPublic ? "public" : "private",
-      documents: [{ title: file.name, url: uploadResponse.secure_url, uploadDate: new Date() }],
+      documents: [{ title: file.name, fileUrl: uploadResponse.secure_url, uploadDate: new Date() }],
     });
 
     await newCollection.save();

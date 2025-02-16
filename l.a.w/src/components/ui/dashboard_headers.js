@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Button from "./CustomButton";
 import { 
@@ -9,6 +12,17 @@ import {
 import { UserCircle } from "lucide-react";
 
 export function DashboardHeader() {
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    // Replace with actual authentication logic
+    const getUserId = () => {
+      return localStorage.getItem("userId"); // Example: Fetch from localStorage or API
+    };
+
+    setUserId(getUserId());
+  }, []);
+
   return (
     <header className="border-b">
       <div className="container mx-auto px-6">
@@ -21,15 +35,19 @@ export function DashboardHeader() {
               <Link href="/dashboard" className="text-sm font-medium hover:text-primary">
                 Dashboard
               </Link>
-              <Link href="/collections" className="text-sm font-medium hover:text-primary">
-                My Collections
-              </Link>
-              <Link href="/upload" className="text-sm font-medium hover:text-primary">
-                Upload
-              </Link>
+              {userId && (
+                <>
+                  <Link href="/collections" className="text-sm font-medium hover:text-primary">
+                    My Collections
+                  </Link>
+                  <Link href="/upload" className="text-sm font-medium hover:text-primary">
+                    Upload
+                  </Link>
+                </>
+              )}
             </nav>
           </div>
-          <div className="flex items-center gap-4">
+         {/* <div className="flex items-center gap-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
@@ -46,7 +64,7 @@ export function DashboardHeader() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>
