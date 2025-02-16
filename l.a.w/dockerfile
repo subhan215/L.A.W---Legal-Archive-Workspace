@@ -1,0 +1,30 @@
+# Use the official Node.js image
+FROM node:18-alpine
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json first
+COPY package.json package-lock.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the project files
+COPY . .
+
+# Set Environment Variables for Cloudinary and MongoDB
+ENV MONGODB_URI=mongodb://mongo:27017/trash_solutions
+ENV CLOUDINARY_CLOUD_NAME=your_cloud_name
+ENV CLOUDINARY_API_KEY=your_api_key
+ENV CLOUDINARY_API_SECRET=your_api_secret
+ENV NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
+
+# Build the Next.js app
+RUN npm run build
+
+# Expose the port Next.js runs on
+EXPOSE 3000
+
+# Command to start the app
+CMD ["npm", "run", "start"]
